@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: yourspace # {"$kpt-set":"namespace-setter"}
+  name: query-engine-deployment
+spec:
+  replicas: 1 # {"$kpt-set":"query-replicas"}
+  template:
+    spec:
+      containers:
+      - name: query
+        image: query:1.8.0

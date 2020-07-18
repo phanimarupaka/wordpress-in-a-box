@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: yourspace # {"$kpt-set":"namespace-setter"}
+  name: mysql-deployment
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:1.7.9

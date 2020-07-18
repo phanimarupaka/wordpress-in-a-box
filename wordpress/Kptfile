@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: wordpress
+upstream:
+    type: git
+    git:
+        commit: 9c2a561464f4cb12d1fadfafe9488514380a33c0
+        repo: git@github.com:phanimarupaka/wordpress
+        directory: /
+        ref: v0.1.0

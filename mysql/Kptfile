@@ -1,0 +1,18 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: mysql
+upstream:
+  type: git
+  git:
+    commit: 435484eb7753aa00770cbe99152147775b158fe4
+    repo: git@github.com:phanimarupaka/mysql
+    directory: /
+    ref: v0.1.0
+openAPI:
+  definitions:
+    io.k8s.cli.setters.namespace-setter:
+      x-k8s-cli:
+        setter:
+          name: namespace-setter
+          value: yourspace

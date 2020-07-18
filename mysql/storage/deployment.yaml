@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: yourspace # {"$kpt-set":"namespace-setter"}
+  name: storage-deployment
+spec:
+  replicas: 2 # {"$kpt-set":"storage-replicas"}
+  template:
+    spec:
+      containers:
+      - name: storage
+        image: storage:1.7.7
