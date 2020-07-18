@@ -1,11 +1,29 @@
 apiVersion: kpt.dev/v1alpha1
 kind: Kptfile
 metadata:
-    name: wordpress
+  name: wordpress
 upstream:
-    type: git
-    git:
-        commit: 9c2a561464f4cb12d1fadfafe9488514380a33c0
-        repo: git@github.com:phanimarupaka/wordpress
-        directory: /
-        ref: v0.1.0
+  type: git
+  git:
+    commit: 9c2a561464f4cb12d1fadfafe9488514380a33c0
+    repo: git@github.com:phanimarupaka/wordpress
+    directory: /
+    ref: v0.1.0
+dependencies:
+- name: auth-module
+  git:
+    repo: git@github.com:phanimarupaka/auth-module
+    directory: /
+    ref: v0.1.0
+  updateStrategy: resource-merge
+openAPI:
+  definitions:
+    io.k8s.cli.setters.wordpress-replicas:
+      x-k8s-cli:
+        setter:
+          name: wordpress-replicas
+          value: "5"
+inventoryTemplate:
+  namespace: yourspace
+  labels:
+    cli-utils.sigs.k8s.io/inventory-id: wordpress-inventory

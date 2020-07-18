@@ -9,10 +9,25 @@ upstream:
     repo: git@github.com:phanimarupaka/mysql
     directory: /
     ref: v0.1.0
+dependencies:
+- name: storage
+  local:
+    directory: ./storage
+  updateStrategy: resource-merge
+  cli-utils.sigs.k8s.io/inventory-id: storage-inventory
+- name: query-engine
+  local:
+    directory: ./query-engine
+  updateStrategy: resource-merge
+  cli-utils.sigs.k8s.io/inventory-id: query-engine-inventory
 openAPI:
   definitions:
-    io.k8s.cli.setters.namespace-setter:
+    io.k8s.cli.setters.mysql-replicas:
       x-k8s-cli:
         setter:
-          name: namespace-setter
-          value: yourspace
+          name: mysql-replicas
+          value: "3"
+inventoryTemplate:
+  namespace: yourspace
+  labels:
+    cli-utils.sigs.k8s.io/inventory-id: mysql-inventory

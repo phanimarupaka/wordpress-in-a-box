@@ -1,0 +1,17 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: storage
+packageMetadata:
+  shortDescription: sample description
+openAPI:
+  definitions:
+    io.k8s.cli.setters.storage-replicas:
+      x-k8s-cli:
+        setter:
+          name: storage-replicas
+          value: "2"
+inventoryTemplate:
+  namespace: yourspace
+  labels:
+    cli-utils.sigs.k8s.io/inventory-id: storage-inventory

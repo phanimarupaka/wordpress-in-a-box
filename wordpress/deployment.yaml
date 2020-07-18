@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: yourspace
+  namespace: yourspace # {"$kpt-set":"namespace-setter"}
   name: wordpress-deployment
 spec:
-  replicas: 5
+  replicas: 5 # {"$kpt-set":"wordpress-replicas"}
   template:
     spec:
       containers:

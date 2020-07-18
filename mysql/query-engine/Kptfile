@@ -1,0 +1,17 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: query-engine
+packageMetadata:
+  shortDescription: sample description
+openAPI:
+  definitions:
+    io.k8s.cli.setters.query-replicas:
+      x-k8s-cli:
+        setter:
+          name: query-replicas
+          value: "1"
+inventoryTemplate:
+  namespace: yourspace
+  labels:
+    cli-utils.sigs.k8s.io/inventory-id: query-engine-inventory

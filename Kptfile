@@ -1,0 +1,35 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: wordpress-in-a-box
+upstream:
+    type: git
+    git:
+        commit: 2a6386e094ca9d4879c286031c27495122a51b67
+        repo: git@github.com:phanimarupaka/wordpress-in-a-box
+        directory: /
+        ref: v0.1.0
+dependencies:
+- name: mysql
+  local:
+    directory: ./mysql
+  updateStrategy: resource-merge
+  cli-utils.sigs.k8s.io/inventory-id: mysql-inventory
+- name: wordpress
+  local:
+    directory: ./wordpress
+  updateStrategy: resource-merge
+  cli-utils.sigs.k8s.io/inventory-id: wordpress-inventory
+openAPI:
+  definitions:
+    io.k8s.cli.setters.namespace-setter:
+      x-k8s-cli:
+        setter:
+          name: namespace-setter
+          value: yourspace
+          required: true
+    io.k8s.cli.grouped-setters.wiab-namespace:
+      x-k8s-cli:
+        setter:
+          name: wiab-namespace
+          setters: [namespace-setter, auth-namespace]
